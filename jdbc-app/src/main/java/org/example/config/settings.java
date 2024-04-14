@@ -1,4 +1,4 @@
-package org.example;
+package org.example.config;
 
 import com.zaxxer.hikari.HikariDataSource;
 
@@ -9,7 +9,7 @@ public class settings {
 /**/
     private static DataSource setDataSource(){
         HikariDataSource ds = new HikariDataSource();
-            ds.setJdbcUrl("jdbc:mysql://10.0.0.22/dbAbejas");
+            ds.setJdbcUrl("jdbc:mysql://10.0.0.22/ebgsolut_abejas");
             ds.setUsername("root");
             ds.setPassword("Padames08$");
         return ds;

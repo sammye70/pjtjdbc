@@ -1,10 +1,10 @@
-package org.example.model;
+package org.example.entities;
 
 import java.sql.Date;
 import java.sql.Timestamp;
 
 
-public class articlesModel {
+public class articlesEntity {
 
     private long number;
     private long idproduct;
@@ -21,11 +21,11 @@ public class articlesModel {
     private Date modificated;
     private String status;
 
-    public articlesModel() {
+    public articlesEntity() {
     }
 
 
-    public articlesModel(long number, long idproduct, String idprovider, String description, String idfamily, int stock, int minstock, Timestamp expirece, float cost, float sellprice, int createby, Date created, Date modificated, String status) {
+    public articlesEntity(long number, long idproduct, String idprovider, String description, String idfamily, int stock, int minstock, Timestamp expirece, float cost, float sellprice, int createby, Date created, Date modificated, String status) {
         this.number = number;
         this.idproduct = idproduct;
         this.idprovider = idprovider;
