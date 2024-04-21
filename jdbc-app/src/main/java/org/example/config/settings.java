@@ -9,7 +9,7 @@ public class settings {
 /**/
     private static DataSource setDataSource(){
         HikariDataSource ds = new HikariDataSource();
-            ds.setJdbcUrl("jdbc:mysql://10.0.0.22/ebgsolut_abejas");
+            ds.setJdbcUrl("jdbc:mysql://10.0.0.22:3306/ebgsolut_abejas");
             ds.setUsername("root");
             ds.setPassword("Padames08$");
         return ds;

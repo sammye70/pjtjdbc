@@ -5,6 +5,7 @@ import org.example.entities.Iarticles;
 import org.example.entities.articlesEntity;
 
 import java.sql.*;
+import java.time.LocalDate;
 
 public class articlesModel implements Iarticles {
 
@@ -13,7 +14,7 @@ public class articlesModel implements Iarticles {
     public void viewTableArticles() {
         try{
             Connection con = settings.Connection().getConnection();
-            PreparedStatement statement = con.prepareCall("call ebgsolut_abejas.spGet_AllProduct();");
+            PreparedStatement statement = con.prepareCall("call spGet_AllProduct();");
             Statement statement1 = con.createStatement();
             ResultSet rs = statement.executeQuery();
 
@@ -34,6 +35,7 @@ public class articlesModel implements Iarticles {
         }
     }
 
+
     @Override
     public void getArticlesByStatus(int status) {
 
@@ -41,9 +43,10 @@ public class articlesModel implements Iarticles {
             var obj = new articlesEntity();
 
             Connection connection = settings.Connection().getConnection();
-            PreparedStatement statement = connection.prepareCall("{call ebgsolut_abejas.spGet_ProductByStatus(?)}");
-            statement.setString(1, String.valueOf(status)); //Set parameters on stored procedure
+            PreparedStatement statement = connection.prepareCall("{call spGet_ProductByStatus(?)}"); // calling store procedure "{call sp_name(?)}; ?=number of parameters"
+            statement.setString(1, String.valueOf(status)); //Setting parameters on stored procedure
             ResultSet rs = statement.executeQuery();
+
 
             System.out.println("Report of Product by Status");
 
@@ -51,14 +54,49 @@ public class articlesModel implements Iarticles {
                 obj.setNumber(rs.getLong("numero"));
                 obj.setIdproduct(rs.getLong("idproducto"));
                 obj.setDescription(rs.getString("descripcion"));
+                obj.setExpirece(rs.getTimestamp("f_vencimiento"));
+                obj.setIdfamily(rs.getString("category"));
                 obj.setStatus(rs.getString("estado"));
 
-                System.out.println(obj.getNumber() + "   +   " + obj.getIdproduct() + "   +   " + obj.getDescription() + "   +  "  + obj.getStatus(String.valueOf(status)));
+                System.out.println(obj.getNumber() + "   +   " + obj.getIdproduct() + "   +   " + obj.getDescription() + "   +  " +  obj.getIdfamily() + " + " +obj.getExpirece() + " +  " + obj.getStatus(String.valueOf(status)));
             }
         }
         catch(SQLException e){
             System.out.println(e.getMessage());
         }
 
+    }
+
+    @Override
+    public void createArticle(long idproduct, long idprovider, String description, String idfamily, int stock, int stockminimal, LocalDate expirece, float cost, float p_sell, int createdby,
+                              Timestamp created, LocalDate modificated, String status) {
+
+        try{
+            System.out.println("Create an Article");
+
+            Connection connection = settings.Connection().getConnection();
+
+            PreparedStatement statement = connection.prepareCall("{call spCreateProduct(?,?,?,?,?,?,?,?,?,?,?,?,?)}");
+            statement.setLong(1,idproduct);
+            statement.setString(2,"idproveedor");
+            statement.setString(3,"descripcion");
+            statement.setString(4,"idfamilia");
+            statement.setFloat(5,stock);
+            statement.setFloat(6,stockminimal);
+            statement.setDate(7,Date.valueOf(LocalDate.now()));
+            statement.setFloat(8,cost);
+            statement.setFloat(9,p_sell);
+            statement.setInt(10, createdby);
+            statement.setDate(11,Date.valueOf(LocalDate.now()));
+            statement.setDate(12,Date.valueOf(LocalDate.now()));
+            statement.setString(13,"status");
+
+            ResultSet rs = statement.executeQuery();
+
+            rs.insertRow();
+
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
     }
 }
