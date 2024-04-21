@@ -146,7 +146,7 @@ public class articlesEntity {
         this.modificated = modificated;
     }
 
-    public String getStatus() {
+    public String getStatus(String s) {
         return status;
     }
 
