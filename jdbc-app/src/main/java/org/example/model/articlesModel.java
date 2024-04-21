@@ -68,7 +68,11 @@ public class articlesModel implements Iarticles {
     }
 
     @Override
+<<<<<<< HEAD
     public void createArticle(long idproduct, long idprovider, String description, String idfamily, int stock, int stockminimal, LocalDate expirece, float cost, float p_sell, int createdby,
+=======
+   public void createArticle(long idproduct, long idprovider, String description, String idfamily, int stock, int stockminimal, LocalDate expirece, float cost, float p_sell, int createdby,
+>>>>>>> refs/remotes/origin/main
                               LocalDate created, LocalDate modificated, String status) {
 
         try{
@@ -94,8 +98,8 @@ public class articlesModel implements Iarticles {
             ResultSet rs = statement.executeQuery();
 
             rs.insertRow();
-
-        }catch (SQLException e){
+            }
+            catch (SQLException e){
             System.out.println(e.getMessage());
         }
     }
