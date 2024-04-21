@@ -8,5 +8,5 @@ public interface Iarticles {
     void viewTableArticles();
     void getArticlesByStatus(int status);
     void createArticle(long idproduct, long idprovider, String description, String idfamily, int stock, int stockminimal, LocalDate expirece, float cost, float p_sell, int createdby,
-                       Timestamp created, LocalDate modificated, String status);
+                       LocalDate created, LocalDate modificated, String status);
 }

@@ -69,7 +69,7 @@ public class articlesModel implements Iarticles {
 
     @Override
     public void createArticle(long idproduct, long idprovider, String description, String idfamily, int stock, int stockminimal, LocalDate expirece, float cost, float p_sell, int createdby,
-                              Timestamp created, LocalDate modificated, String status) {
+                              LocalDate created, LocalDate modificated, String status) {
 
         try{
             System.out.println("Create an Article");
@@ -78,18 +78,18 @@ public class articlesModel implements Iarticles {
 
             PreparedStatement statement = connection.prepareCall("{call spCreateProduct(?,?,?,?,?,?,?,?,?,?,?,?,?)}");
             statement.setLong(1,idproduct);
-            statement.setString(2,"idproveedor");
-            statement.setString(3,"descripcion");
-            statement.setString(4,"idfamilia");
+            statement.setString(2, String.valueOf(idprovider));
+            statement.setString(3,  description);
+            statement.setString(4, idfamily);
             statement.setFloat(5,stock);
             statement.setFloat(6,stockminimal);
-            statement.setDate(7,Date.valueOf(LocalDate.now()));
+            statement.setDate(7,Date.valueOf(expirece));
             statement.setFloat(8,cost);
             statement.setFloat(9,p_sell);
             statement.setInt(10, createdby);
-            statement.setDate(11,Date.valueOf(LocalDate.now()));
-            statement.setDate(12,Date.valueOf(LocalDate.now()));
-            statement.setString(13,"status");
+            statement.setDate(11, Date.valueOf(created));
+            statement.setDate(12, Date.valueOf(modificated));
+            statement.setString(13, status);
 
             ResultSet rs = statement.executeQuery();
 

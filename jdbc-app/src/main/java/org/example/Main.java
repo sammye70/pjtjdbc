@@ -17,10 +17,10 @@ public class Main {
        // obj.viewTableArticles();
 
         // View Articles by status
-         obj.getArticlesByStatus(1);
+         // obj.getArticlesByStatus(1);
 
         //Insert new article
-       // obj.createArticle(567L, 2, "Product Test",  String.valueOf(3),  8, 10,  LocalDate.now(), 56.8f, 100,
-       //         2, Timestamp.valueOf(LocalDateTime.now()),  LocalDate.now(), String.valueOf(1 ));
+        obj.createArticle(567L, 2, "Product Test",  String.valueOf(3),  8, 10,  LocalDate.now(), 56.8f, 100,
+              2, LocalDate.now(),  LocalDate.now(), String.valueOf(1 ));
     }
 }
